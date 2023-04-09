@@ -1,0 +1,26 @@
+.header {
+    margin-bottom: 20px;
+}
+.d-flex.tools {
+    width: 90px;
+    justify-content: space-between;
+}
+a.navbar-brand.logo {
+    color: #ffffff;
+}
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+}
+.card.content-card {
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.content{
+    min-height: 85vh;
+}
+.footer {
+    min-height: 70px;
+    color: #ffffff;
+    padding: 15px;
+}
