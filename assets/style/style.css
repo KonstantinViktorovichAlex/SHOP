@@ -24,3 +24,51 @@ a.navbar-brand.logo {
     color: #ffffff;
     padding: 15px;
 }
+.popup {
+    display: none;
+    position: absolute;
+    background: #8b8787ed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    backdrop-filter: blur(3px);
+    z-index: 999;
+}
+
+.content-trash {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 500px;
+    margin: 100px auto;
+}
+.trash-card {
+    width: 300px;
+    height: 300px;
+}
+.trash-card {
+    width: 300px;
+    height: 300px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+    background: #ffffff;
+}
+.image-trash {
+    width: 100px;
+}
+.trash-out {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+.header-trash {
+    margin-right: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    width: 100%;
+}
