@@ -1,14 +1,13 @@
 const container = document.querySelector(".content-container");
-const btnbuy = document.getElementById("btn-success");
-const modalbuy = document.getElementById("modalreg");
-const closemodalwind = document.getElementsByClassName("close_modal_window")[0];
-const form1 = document.querySelector('form1');
+const outTrash = document.querySelector(".trash-out");
+const removeTrash = document.querySelector(".remove-trash");
+const totalPrice = document.querySelector(".total-price");
 const mockData = [
   {
     id: 1,
     title: "CF Moto",
     description: "super bike",
-    price: "1000",
+    price: 1000,
     image:
       "https://cfmoto-moto.ru/wp-content/uploads/2020/12/300sr-orange-moto.png",
   },
@@ -16,13 +15,13 @@ const mockData = [
     id: 2,
     title: "CF Moto",
     description: "super bike",
-    price: "1500",
+    price: 1500,
     image:
       "https://cdn.shopify.com/s/files/1/0509/8772/9074/products/IMG_9079_800x.png?v=1668676167",
   },
 ];
 
-const trashArr = [];
+let trashArr = JSON.parse(localStorage.getItem("trash")) || [];
 
 mockData.forEach((item) => {
   const div = document.createElement("div");
@@ -53,8 +52,36 @@ const removeTrashBtn = document.querySelector(".remove-trash");
 // mockData.forEach(function(item) {
 // })
 
+function createTrash() {
+  let local = JSON.parse(localStorage.getItem("trash"));
+  local.forEach(function (item) {
+    const div = document.createElement("div");
+    div.classList.add("card-trash");
+    let cardTrash = `<div class="card" style="width: 13rem;">
+    <img src="${item.image}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <p class="card-text">${item.price}$</p>
+    </div>
+  </div>`;
+    div.innerHTML = cardTrash;
+    outTrash.append(div);
+  });
+}
+
+function total() {
+  let price = 0;
+  let local = JSON.parse(localStorage.getItem("trash"));
+  local.forEach(function (item) {
+    price += item.price;
+    // price = price + item.price
+  });
+  totalPrice.innerText = `${price} $`;
+}
+
 trashBtn.addEventListener("click", function () {
   popup.style.display = "block";
+  createTrash();
+  total();
 });
 
 closePopupBtn.addEventListener("click", function () {
@@ -67,6 +94,7 @@ cards.forEach((card) => {
       let id = event.target.getAttribute("data-id");
       let product = { ...mockData.find((item) => item.id === Number(id)) };
       product.id = Date.now();
+
       // let product = mockData.find((item) => item.id === Number(id));
       // const pr = {
       //   id: Date.now(),
@@ -78,6 +106,7 @@ cards.forEach((card) => {
       // trashArr.push(pr);
       trashArr.push(product);
       console.log(trashArr);
+      localStorage.setItem("trash", JSON.stringify(trashArr));
     }
   });
 });
@@ -87,28 +116,12 @@ cards.forEach((card) => {
 //     item.remove();
 //   });
 // });
-btnbuy.addEventListener("click", function () {
-  modalbuy.style.display = "block";
-});
 
-btnbuy.addEventListener('click', () => {
-  form1.classList.add('text');
-});
-
-closemodalwind.addEventListener("click", function () {
-  modalbuy.style.display = "none";
-});
-
-
-
-
-
-
-
-
-
-window.addEventListener("click", function (event) {
-  if (event.target == modalbuy) {
-      modalbuy.style.display = "none";
-  }
+removeTrash.addEventListener("click", function () {
+  trashArr = [];
+  localStorage.removeItem("trash");
+  document.querySelectorAll(".card-trash").forEach(function (card) {
+    card.remove();
+  });
+  totalPrice.innerText = `0 $`;
 });
