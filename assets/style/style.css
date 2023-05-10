@@ -72,3 +72,53 @@ a.navbar-brand.logo {
     justify-content: end;
     width: 100%;
 }
+
+
+.modalbuy {
+    /* position: absolute !important; */
+    display: none;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 1000;
+}
+.modalbuy .modal_content {
+    /* position: absolute !important; */
+    background-color: #542aa3;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #b03030;
+    width: 80%;
+    z-index: 99999;
+}
+.modalbuy .modal_content .close_modal_window {
+    /* position: absolute !important; */
+    color: #257135;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+#form1 {
+    display: none;
+    animation-duration: 1.5s;
+    animation-fill-mode: both;
+    animation-name: fadeIn;
+  }
+  
+  #form1.open {
+    display: block;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }

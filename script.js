@@ -1,4 +1,8 @@
 const container = document.querySelector(".content-container");
+const btnbuy = document.getElementById("btn-success");
+const modalbuy = document.getElementById("modalreg");
+const closemodalwind = document.getElementsByClassName("close_modal_window")[0];
+const form1 = document.querySelector('form1');
 const mockData = [
   {
     id: 1,
@@ -63,7 +67,7 @@ cards.forEach((card) => {
       let id = event.target.getAttribute("data-id");
       let product = { ...mockData.find((item) => item.id === Number(id)) };
       product.id = Date.now();
-      //let product = mockData.find((item) => item.id === Number(id));
+      // let product = mockData.find((item) => item.id === Number(id));
       // const pr = {
       //   id: Date.now(),
       //   title: product.title,
@@ -83,3 +87,28 @@ cards.forEach((card) => {
 //     item.remove();
 //   });
 // });
+btnbuy.addEventListener("click", function () {
+  modalbuy.style.display = "block";
+});
+
+btnbuy.addEventListener('click', () => {
+  form1.classList.add('text');
+});
+
+closemodalwind.addEventListener("click", function () {
+  modalbuy.style.display = "none";
+});
+
+
+
+
+
+
+
+
+
+window.addEventListener("click", function (event) {
+  if (event.target == modalbuy) {
+      modalbuy.style.display = "none";
+  }
+});

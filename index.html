@@ -52,7 +52,23 @@
                     <div class="total-price">9999$</div>
                 </div>
                 <div class="buttons-groupe">
-                    <button type="button" class="btn btn-success">Оплатить</button>
+                    <button type="button" class="btn btn-success" id="btn-success">Оплатить</button>
+                      <div id="modalreg" class="modal">
+                        <div class="modal_content">
+                          <span class="close_modal_window">X</span>
+                          <div id="form1">
+                            <form role="form" action="/requestFine" autocomplete="off" method="POST">
+                              <label>логин:</label>
+                              <input type="text" name="nameReq">
+                              <label>пароль:</label>
+                              <input type="text" name="password">
+                              <label>почта:</label>
+                              <input type="text" name="email">
+                              <button type="submit" class="btn btn-success">Отправить</button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
                     <button type="button" class="btn btn-warning remove-trash">Очистить корзину</button>
                 </div>
                 
