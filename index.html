@@ -20,7 +20,7 @@
               </a>
               <div class="d-flex tools">
                     <button class="btn btn-outline-primary  trash"><i class="bi bi-cart"></i></button>
-                    <button class="btn btn-outline-primary"><i class="bi bi-person-fill"></i></i></button>
+                    <button class="btn btn-outline-primary login-btn"><i class="bi bi-person-fill"></i></i></button>
                 </div>
             </div>
         </nav>
@@ -43,14 +43,41 @@
                     <button type="button" class="btn btn-success" id="btn-success">Оплатить</button>
                     <button type="button" class="btn btn-warning remove-trash">Очистить корзину</button>
                 </div>
-                
             </div>
-
+        </div>
+        <div class="popup-login">
+            <div class="form-wrapper">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" placeholder="name@example.com">
+                  </div>
+                  <div class="mb-3">
+                    <label for="pass" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="pass">
+                  </div>
+                  <div>
+                    <button type="button" class="btn btn-warning modelClose">Cancel</button>
+                    <button type="button" class="btn btn-primary">Login</button>
+                  </div>
+            </div>
         </div>
         <div class="container-fluid content-container">
-                
-          </div>
-          
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">image</th>
+                    <th scope="col">brand</th>
+                    <th scope="col">category</th>
+                    <th scope="col">price</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody class="product-table">
+                    
+                </tbody>
+              </table>   
+        </div>
     </section>
     
     <section class="footer bg-dark">
