@@ -95,3 +95,8 @@ a.navbar-brand.logo {
 .imageTable {
     width: 100px;
 }
+.images {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
