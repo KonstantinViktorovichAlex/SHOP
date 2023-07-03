@@ -49,6 +49,23 @@ const closePopupBtn = document.querySelector(".close-popup");
 const cards = document.querySelectorAll(".cards");
 const trashOut = document.querySelector(".trash-out");
 const removeTrashBtn = document.querySelector(".remove-trash");
+// const payBtn = document.querySelector(".btn-sm");
+
+// trashBtn.addEventListener("click", function () {
+//   popup.classList.add("popup");
+// });
+
+// trashOut.addEventListener("click", function () {
+//   popup.classList.remove("popup");
+// });
+
+// payBtn.addEventListener("click", function (e) {
+//   e.preventDefault();
+
+// });
+
+
+
 
 removeTrash.addEventListener("click", function () {
   trashArr = [];
