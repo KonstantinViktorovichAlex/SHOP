@@ -63,8 +63,7 @@ a.navbar-brand.logo {
 .trash-out {
     display: flex;
     width: 100%;
-    flex-direction: column;
-    align-items: center;
+    justify-content: space-evenly;
 }
 .header-trash {
     margin-right: 60px;
@@ -100,27 +99,4 @@ a.navbar-brand.logo {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-.wrapper-card {
-    display: flex;
-    width: 800px;
-    border: 1px solid black;
-    background: #ffffff;
-    border-radius: 10px;
-    margin-bottom: 10px;
-}
-.image{
-    width: 150px;
-}
-.image-card {
-    width: 150px;
-    border-top-left-radius: 7px;
-    border-bottom-left-radius: 7px;
-}
-.content-card {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    justify-content: space-between;
-    padding: 10px
 }
