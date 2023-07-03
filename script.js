@@ -98,7 +98,7 @@ function renderSingleProduct(product) {
   description.appendChild(descriptionInfo);
 }
 
-// TRASH FUNCTIONS --------------------------------
+// TRASH FUNCTIONS ----------------------------
 
 trashBtn.addEventListener("click", function (e) {
   popup.style.display = "block";
