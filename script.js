@@ -1,14 +1,19 @@
 const container = document.querySelector(".content-container");
 const outTrash = document.querySelector(".trash-out");
 const removeTrash = document.querySelector(".remove-trash");
-const totalPrice = document.querySelector(".total-price");
 const loginBtn = document.querySelector(".login-btn");
 const popupLogin = document.querySelector(".popup-login");
 const modelClose = document.querySelector(".modelClose");
 const productTable = document.querySelector(".product-table");
+// TRASH
+const popup = document.querySelector(".popup");
+const trashBtn = document.querySelector(".trash");
+const closePopupBtn = document.querySelector(".close-popup");
+const trashOut = document.querySelector(".trash-out");
+const totalTrash = document.querySelector(".total-price");
 
 const allProducts = [];
-const trashProducts = [];
+const trashProducts = JSON.parse(localStorage.getItem("products")) || [];
 
 function init() {
   getData();
@@ -21,6 +26,10 @@ async function getData() {
 
   result.products.forEach((item) => allProducts.push(item));
   renderData(result);
+  payListeners();
+  // JSON.parse(localStorage.getItem("products")).forEach(function (item) {
+  //   trashProducts.push(item);
+  // });
 }
 
 function renderData({ products }) {
@@ -33,7 +42,7 @@ function renderData({ products }) {
     <td>${product.category}</td>
     <td>${product.price}$</td>
     <td>
-    <button type="button" class="btn btn-success btn-sm">pay</button>
+    <button type="button" class="btn btn-success btn-sm pay" data-id=${product.id}>pay</button>
     <button type="button" class="btn btn-warning btn-sm more" data-id=${product.id}>Подробнее</button>
     </td>
     </tr>
@@ -42,30 +51,6 @@ function renderData({ products }) {
   });
   generateMoreEvents();
 }
-
-const popup = document.querySelector(".popup");
-const trashBtn = document.querySelector(".trash");
-const closePopupBtn = document.querySelector(".close-popup");
-const cards = document.querySelectorAll(".cards");
-const trashOut = document.querySelector(".trash-out");
-const removeTrashBtn = document.querySelector(".remove-trash");
-// const payBtn = document.querySelector(".btn-sm");
-
-// trashBtn.addEventListener("click", function () {
-//   popup.classList.add("popup");
-// });
-
-// trashOut.addEventListener("click", function () {
-//   popup.classList.remove("popup");
-// });
-
-// payBtn.addEventListener("click", function (e) {
-//   e.preventDefault();
-
-// });
-
-
-
 
 removeTrash.addEventListener("click", function () {
   trashArr = [];
@@ -111,6 +96,64 @@ function renderSingleProduct(product) {
   const descriptionInfo = document.createElement("h3");
   descriptionInfo.innerText = product.description;
   description.appendChild(descriptionInfo);
+}
+
+// TRASH FUNCTIONS --------------------------------
+
+trashBtn.addEventListener("click", function (e) {
+  popup.style.display = "block";
+  renderTrash();
+});
+
+closePopupBtn.addEventListener("click", function (e) {
+  popup.style.display = "none";
+  trashOut.innerHTML = "";
+});
+
+function payListeners() {
+  const payBtns = document.querySelectorAll(".pay");
+  payBtns.forEach(function (item) {
+    item.addEventListener("click", addToTrash);
+  });
+}
+
+function addToTrash() {
+  let idProduct = this.getAttribute("data-id");
+  // const product = allProducts.find(item => item.id === idProduct)
+  const product = allProducts.find(function (item) {
+    if (item.id === Number(idProduct)) {
+      return item;
+    }
+  });
+  console.log(product);
+  trashProducts.push(product);
+  localStorage.setItem("products", JSON.stringify(trashProducts));
+}
+
+function renderTrash() {
+  trashProducts.forEach(function (product) {
+    const div = document.createElement("div");
+    div.innerHTML = `
+    <div class="wrapper-card">
+      <div class="image">
+        <img class="image-card" src=${product.images[0]} alt="">
+      </div>
+      <div class="content-card">
+        <h3>${product.brand} $${product.price}</h3>
+        <button type="button" class="btn btn-sm btn-danger">remove</button>
+      </div>
+    </div>`;
+    trashOut.append(div);
+  });
+  totalPrice();
+}
+
+function totalPrice() {
+  let count = 0;
+  trashProducts.forEach(function (product) {
+    count += product.price;
+  });
+  totalTrash.innerText = count;
 }
 
 init();
