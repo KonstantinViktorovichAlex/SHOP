@@ -11,9 +11,10 @@ const trashBtn = document.querySelector(".trash");
 const closePopupBtn = document.querySelector(".close-popup");
 const trashOut = document.querySelector(".trash-out");
 const totalTrash = document.querySelector(".total-price");
+const clearAllTrash = document.querySelector(".remove-trash");
 
 const allProducts = [];
-const trashProducts = JSON.parse(localStorage.getItem("products")) || [];
+let trashProducts = JSON.parse(localStorage.getItem("products")) || [];
 
 function init() {
   getData();
@@ -120,17 +121,20 @@ function payListeners() {
 function addToTrash() {
   let idProduct = this.getAttribute("data-id");
   // const product = allProducts.find(item => item.id === idProduct)
-  const product = allProducts.find(function (item) {
-    if (item.id === Number(idProduct)) {
-      return item;
-    }
-  });
-  console.log(product);
+  const product = {
+    ...allProducts.find(function (item) {
+      if (item.id === Number(idProduct)) {
+        return item;
+      }
+    }),
+  };
+  product.id = new Date().getTime();
   trashProducts.push(product);
   localStorage.setItem("products", JSON.stringify(trashProducts));
 }
 
 function renderTrash() {
+  trashOut.innerHTML = "";
   trashProducts.forEach(function (product) {
     const div = document.createElement("div");
     div.innerHTML = `
@@ -140,12 +144,14 @@ function renderTrash() {
       </div>
       <div class="content-card">
         <h3>${product.brand} $${product.price}</h3>
-        <button type="button" class="btn btn-sm btn-danger">remove</button>
+        <button type="button" class="btn btn-sm btn-danger remove-btn" data-id=${product.id}>remove</button>
       </div>
     </div>`;
     trashOut.append(div);
   });
   totalPrice();
+  removeItemTrash();
+  removeAll();
 }
 
 function totalPrice() {
@@ -156,4 +162,27 @@ function totalPrice() {
   totalTrash.innerText = count;
 }
 
+function removeItemTrash() {
+  const trashBtns = document.querySelectorAll(".remove-btn");
+  trashBtns.forEach(function (item) {
+    item.addEventListener("click", removeItem);
+  });
+}
+
+function removeItem() {
+  let idProduct = this.getAttribute("data-id");
+  console.log(idProduct);
+
+  trashProducts = trashProducts.filter((item) => item.id !== Number(idProduct));
+  localStorage.setItem("products", JSON.stringify(trashProducts));
+  console.log(trashProducts);
+  renderTrash();
+}
+function removeAll() {
+  clearAllTrash.addEventListener("click", function () {
+    localStorage.removeItem("products");
+    trashOut.innerHTML = "";
+    totalTrash.innerText = 0;
+  });
+}
 init();
